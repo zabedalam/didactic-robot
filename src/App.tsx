@@ -3,7 +3,7 @@ import logo from './logo.svg';
 import Todos from './Todos';
 
 function App() {
-  return <Todos />;
+    return <Todos />;
 }
 
 export default App;
