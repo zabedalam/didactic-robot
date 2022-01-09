@@ -8,19 +8,9 @@ import './style.css';
 const App: React.FC = () => {
     const [todo, setTodo] = useState<string>('');
     const [deadline, setDeadline] = useState<string>('');
-
-    // const [todos, setTodos] = useState<Todo[]>([]);
+    const [todos, setTodos] = useState<Todo[]>([]);
     const [CompletedTodos, setCompletedTodos] = useState<Todo[]>([]);
     const [doing, setDoing] = useState<Todo[]>([]);
-    //New
-    const [todos, setTodos] = React.useState<Todo[]>([
-        {
-            id: Date.now(),
-            todo: 'Hello',
-            isDone: false,
-            deadline: new Date().toDateString(),
-        },
-    ]);
 
     const handleAdd = (e: React.FormEvent) => {
         e.preventDefault();

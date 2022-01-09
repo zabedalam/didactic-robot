@@ -1,5 +1,6 @@
 /* eslint-disable react/jsx-no-duplicate-props */
 /* eslint-disable react/jsx-no-undef */
+import TextField from '@material-ui/core/TextField';
 import React, { useRef } from 'react';
 import './style.css';
 
@@ -12,21 +13,6 @@ interface props {
 }
 
 const TodoInput: React.FC<props> = ({ todo, setTodo, deadline, setDeadline, handleAdd }) => {
-    // function disablePrevDates(startDate:string) {
-    //   const startSeconds = Date.parse(startDate);
-    //   return (date:string) => {
-    //     return Date.parse(date) < startSeconds;
-    //   }
-    // }
-
-    const disablePastDate = () => {
-        const today = new Date();
-        const dd = String(today.getDate() + 1).padStart(2, '0');
-        const mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-        const yyyy = today.getFullYear();
-        return yyyy + '-' + mm + '-' + dd;
-    };
-
     const inputRef = useRef<HTMLInputElement>(null);
 
     return (
@@ -48,11 +34,22 @@ const TodoInput: React.FC<props> = ({ todo, setTodo, deadline, setDeadline, hand
                     className="input__box"
                 />
 
-                <input
-                    type="date"
+                <TextField
+                    defaultValue={new Date().toISOString().slice(0, 16)}
+                    inputProps={{
+                        // min: "2021-02-20T00:00",
+                        min: new Date().toISOString().slice(0, 16),
+                    }}
+                    variant="outlined"
+                    label="Select Date and Time"
+                    placeholder="Select Date and Time"
+                    type="datetime-local"
+                    InputLabelProps={{
+                        shrink: true,
+                        style: { color: 'black' },
+                    }}
                     className="input_date"
                     value={deadline}
-                    min={disablePastDate()}
                     onChange={(e) => {
                         setDeadline(e.target.value);
                     }}
