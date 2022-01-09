@@ -1,6 +1,5 @@
 import React from 'react';
-import logo from './logo.svg';
-import Todos from './Todos';
+import Todos from './pages/todos';
 
 function App() {
     return <Todos />;
