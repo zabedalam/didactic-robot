@@ -18,17 +18,17 @@ const SingleTodo: React.FC<{
     useEffect(() => {
         inputRef.current?.focus();
     }, [edit]);
-
+    //For edit task
     const handleEdit = (e: React.FormEvent, id: number) => {
         e.preventDefault();
         setTodos(todos.map((todo) => (todo.id === id ? { ...todo, todo: editTodo } : todo)));
         setEdit(false);
     };
-
+    //For delete task
     const handleDelete = (id: number) => {
         setTodos(todos.filter((todo) => todo.id !== id));
     };
-
+    //For marking done task
     const handleDone = (id: number) => {
         setTodos(todos.map((todo) => (todo.id === id ? { ...todo, isDone: !todo.isDone } : todo)));
     };

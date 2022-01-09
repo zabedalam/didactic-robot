@@ -12,17 +12,19 @@ const App: React.FC = () => {
     const [CompletedTodos, setCompletedTodos] = useState<Todo[]>([]);
     const [doing, setDoing] = useState<Todo[]>([]);
 
+    //For Adding task
     const handleAdd = (e: React.FormEvent) => {
         e.preventDefault();
 
         if (todo && deadline) {
             setTodos([...todos, { id: Date.now(), todo, deadline, isDone: false }]);
             setTodo('');
+            setDeadline('');
         } else {
             alert('Please fill all the inputs');
         }
     };
-
+    //Code for moving TODO items in different option(TODO,DOING,DONE)
     const onDragEnd = (result: DropResult) => {
         const { destination, source } = result;
 
@@ -40,6 +42,7 @@ const App: React.FC = () => {
         const active = todos;
         const complete = CompletedTodos;
         const progress = doing;
+        // Source Logic
         if (source.droppableId === 'TodosList') {
             add = active[source.index];
             active.splice(source.index, 1);
@@ -50,7 +53,7 @@ const App: React.FC = () => {
             add = complete[source.index];
             complete.splice(source.index, 1);
         }
-
+        // Destination Logic
         if (destination.droppableId === 'TodosList') {
             active.splice(destination.index, 0, add);
         } else if (destination.droppableId === 'TodoDoing') {
